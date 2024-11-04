@@ -1,3 +1,5 @@
+/* It's just a wrapper for material ui */
+
 "use client";
 /* Beacause of it will use in client */
 import { ThemeProvider } from "@mui/material";

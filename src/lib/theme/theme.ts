@@ -1,3 +1,4 @@
+/* Here try to set a MUI theme */
 import { createTheme } from "@mui/material/styles";
 
 export const theme = createTheme({
@@ -14,7 +15,7 @@ export const theme = createTheme({
   components: {
     MuiButton: {
       defaultProps: {
-        variant: "outlined",
+        variant: "contained",
       },
       styleOverrides: {
         root: {
@@ -23,4 +24,11 @@ export const theme = createTheme({
       },
     },
   },
+  typography: {
+    body1: {
+      color: "#0B1134CC",
+    },
+  },
 });
+
+theme.shadows[1] = "0px 5px 22px lightgray";
