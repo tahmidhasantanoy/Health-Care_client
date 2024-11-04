@@ -20,6 +20,7 @@ const Navbar = () => {
         <Stack direction="row" justifyContent={"space-between"} gap={4}>
           <Typography
             component={Link}
+            
             href={"/consulation"}
             sx={{ textDecoration: "none" }}
           >
@@ -27,6 +28,7 @@ const Navbar = () => {
           </Typography>
           <Typography
             component={Link}
+            
             href={"/Healthplans"}
             sx={{ textDecoration: "none" }}
           >
@@ -34,6 +36,7 @@ const Navbar = () => {
           </Typography>
           <Typography
             component={Link}
+            
             href={"/medicine"}
             sx={{ textDecoration: "none" }}
           >
@@ -41,6 +44,7 @@ const Navbar = () => {
           </Typography>
           <Typography
             component={Link}
+            
             href={"/diagostics"}
             sx={{ textDecoration: "none" }}
           >
@@ -48,6 +52,7 @@ const Navbar = () => {
           </Typography>
           <Typography
             component={Link}
+            
             href={"/ngos"}
             sx={{ textDecoration: "none" }}
           >
