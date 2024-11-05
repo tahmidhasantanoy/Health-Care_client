@@ -2,6 +2,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import SingleSpecialist from "./SingleSpecialist";
 export type SpecialistType = {
   id: string;
+  title: string;
   name: string;
   icon: string;
 };
