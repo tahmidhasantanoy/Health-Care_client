@@ -3,7 +3,7 @@ import { SpecialistType } from "./Specialist";
 import { Box, Typography } from "@mui/material";
 
 const SingleSpecialist = ({ specialist }: { specialist: SpecialistType }) => {
-  console.log(specialist);
+  // console.log(specialist);
   return (
     <Box
       sx={{

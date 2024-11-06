@@ -47,18 +47,24 @@ const WhyUS = () => {
             Why Choose Us
           </Typography>
         </Box>
-        <Grid container sx={{ my: 10 }} spacing={2}>
-          {/* 1st */}
-          <Grid item md={6}>
+        <Grid container spacing={2} my={5} alignItems="center">
+          <Grid item md={6} /*  sx={{ margin: "10px" }}  */>
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
                 backgroundColor: "rgba(245,245,245, 1)",
-                borderRadius: "8px",
+                borderRadius: "10px 10px 100px 10px",
+                margin: "20px 0px",
               }}
             >
-              <Box sx={{ backgroundColor: "#FFFF", p: 2 , mx:1}}>
+              <Box
+                sx={{
+                  backgroundColor: "#FFFF",
+                  padding: 2,
+                  mx: 1,
+                }}
+              >
                 <Image
                   src={serviceData[0].imageSrc}
                   alt="Award icon"
@@ -80,9 +86,134 @@ const WhyUS = () => {
                 </Typography>
               </Box>
             </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "rgba(245,245,245, 1)",
+                borderRadius: "10px 100px 10px 10px",
+                margin: "20px 0px",
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: "#FFFF",
+                  padding: 2,
+                  mx: 1,
+                }}
+              >
+                <Image
+                  src={serviceData[1].imageSrc}
+                  alt="Award icon"
+                  width={60}
+                  height={60}
+                />
+              </Box>
+              <Box sx={{ p: 2 }}>
+                <Typography
+                  variant="h4"
+                  component={"h4"}
+                  fontWeight={600}
+                  sx={{ px: 3 }}
+                >
+                  {serviceData[1].title}
+                </Typography>
+                <Typography fontWeight={300} sx={{ px: 3 }}>
+                  {serviceData[1].description}
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "rgba(245,245,245, 1)",
+                borderRadius: "10px 10px 100px 10px",
+                margin: "20px 0px",
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: "#FFFF",
+                  padding: 2,
+                  mx: 1,
+                }}
+              >
+                <Image
+                  src={serviceData[1].imageSrc}
+                  alt="Award icon"
+                  width={60}
+                  height={60}
+                />
+              </Box>
+              <Box sx={{ p: 2 }}>
+                <Typography
+                  variant="h4"
+                  component={"h4"}
+                  fontWeight={600}
+                  sx={{ px: 3 }}
+                >
+                  {serviceData[2].title}
+                </Typography>
+                <Typography fontWeight={300} sx={{ px: 3 }}>
+                  {serviceData[2].description}
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "rgba(245,245,245, 1)",
+                borderRadius: "10px 100px 10px 10px",
+                margin: "20px 0px",
+              }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: "#FFFF",
+                  padding: 2,
+                  mx: 1,
+                }}
+              >
+                <Image
+                  src={serviceData[3].imageSrc}
+                  alt="Award icon"
+                  width={60}
+                  height={60}
+                />
+              </Box>
+              <Box sx={{ p: 2 }}>
+                <Typography
+                  variant="h4"
+                  component={"h4"}
+                  fontWeight={600}
+                  sx={{ px: 3 }}
+                >
+                  {serviceData[3].title}
+                </Typography>
+                <Typography fontWeight={300} sx={{ px: 3 }}>
+                  {serviceData[3].description}
+                </Typography>
+              </Box>
+            </Box>
           </Grid>
-          <Grid item md={6}>
-            <Image src={ChooseUsImage} alt="choose-us"></Image>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+            md={6}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Image src={ChooseUsImage} alt="choose-us image" width={400} />
+            </Box>
           </Grid>
         </Grid>
       </Box>

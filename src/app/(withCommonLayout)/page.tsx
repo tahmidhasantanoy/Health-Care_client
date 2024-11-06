@@ -4,7 +4,7 @@ another page.tsx, it will not take common layout */
 import HeroSection from "@/components/UI/HomePage/heroSection/heroSection";
 import Specialist from "@/components/UI/HomePage/Specialist/Specialist";
 import TopRatedDoctors from "@/components/UI/HomePage/TopRatedDoctors/TopRatedDoctors";
-import WhyUS from "@/components/UI/HomePage/WhyUS/WhyUS";
+import WhyUs from "@/components/UI/HomePage/WhyUS/WhyUs";
 
 const HomePage = () => {
   return (
@@ -12,7 +12,7 @@ const HomePage = () => {
       <HeroSection />
       <Specialist />
       <TopRatedDoctors />
-      <WhyUS />
+      <WhyUs />
     </div>
   );
 };
