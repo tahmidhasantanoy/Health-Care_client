@@ -1,4 +1,5 @@
-/* It's just a wrapper for material ui */
+/* It's just a wrapper for material ui 
+Why this wrapper ? because it will use in client (may be)*/
 
 "use client";
 /* Beacause of it will use in client */
