@@ -14,6 +14,7 @@ import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { registerPatients } from "@/services/actions/registerPatients";
 import { modifyPayload } from "@/utils/modifyPayload";
+import { toast } from "sonner";
 
 // type RegisterInfo = {
 //   name: string;
@@ -49,9 +50,12 @@ const RegisterPage = () => {
     // than directly sending data to the server ?
     try {
       const patientResponseFromServer = await registerPatients(modifiedData);
-      console.log(patientResponseFromServer);
+      if (patientResponseFromServer.success) {
+        toast.success(patientResponseFromServer.message);
+      }
     } catch (err: any) {
       console.log(err.message);
+      toast.error(err.message);
     }
   };
   return (

@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import Providers from "@/lib/Providers/Providers";
 import Navbar from "@/components/shared/Navbar/Navbar";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,10 @@ export default function RootLayout({
           {/* <Navbar />  */}
           <AppRouterCacheProvider>
             {/* For this use client not need to use. */}
-            {children}
+            <>
+              <Toaster  position="top-right"/>
+              {children}
+            </>
           </AppRouterCacheProvider>
         </body>
       </html>
