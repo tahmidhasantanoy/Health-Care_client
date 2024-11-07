@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -21,7 +22,7 @@ type RegisterInfo = {
 };
 
 const registerPage = () => {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register } = useForm<RegisterInfo>();
 
   const onSubmit: SubmitHandler<RegisterInfo> = (data) => {
     console.log(data);
@@ -91,7 +92,7 @@ const registerPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <TextField
-                    {...register("CNumber")}
+                    {...register("contactNumber")}
                     label="Contact Number"
                     type="number"
                     variant="outlined"
