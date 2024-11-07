@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Button,
@@ -10,8 +11,22 @@ import {
 import Image from "next/image";
 import asstes from "@/assets";
 import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-const login = () => {
+type Inputs = {
+  email: string;
+  password: string;
+};
+const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+    console.log(data);
+  };
   return (
     <Container>
       <Stack
@@ -36,31 +51,37 @@ const login = () => {
               </Typography>
             </Box>
           </Stack>
-          <Grid container spacing={2} my={2}>
-            <Grid item md={6}>
-              <TextField
-                label="Email"
-                variant="outlined"
-                size="small"
-                fullWidth={true}
-              />
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container spacing={2} my={2}>
+              <Grid item md={6}>
+                <TextField
+                  {...register("email", { required: true })}
+                  label="Email"
+                  variant="outlined"
+                  size="small"
+                  fullWidth={true}
+                />
+              </Grid>
+              <Grid item md={6}>
+                <TextField
+                  {...register("password", { required: true })}
+                  label="Password"
+                  variant="outlined"
+                  size="small"
+                  fullWidth={true}
+                />
+              </Grid>
+              <Grid item md={6}></Grid>
+              <Grid item md={6}>
+                <Typography mr={"2px"} textAlign={"right"}>
+                  Forgot Password
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item md={6}>
-              <TextField
-                label="Password"
-                variant="outlined"
-                size="small"
-                fullWidth={true}
-              />
-            </Grid>
-            <Grid item md={6}></Grid>
-            <Grid item md={6}>
-              <Typography mr={"2px"} textAlign={"right"}>
-                Forgot Password
-              </Typography>
-            </Grid>
-          </Grid>
-          <Button fullWidth>Login</Button>
+            <Button type="submit" fullWidth>
+              Login
+            </Button>
+          </form>
           <Box
             sx={{
               display: "flex",
@@ -69,7 +90,7 @@ const login = () => {
             }}
           >
             <Typography>
-              Don't haave an account?{" "}
+              Don&apos;t haave an account?{" "}
               <Link href={"/register"}>Create an account</Link>
             </Typography>
           </Box>
@@ -79,4 +100,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

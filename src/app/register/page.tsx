@@ -10,8 +10,22 @@ import {
 import assets from "@/assets";
 import Image from "next/image";
 import Link from "next/link";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type RegisterInfo = {
+  name: string;
+  email: string;
+  password: string;
+  contactNumber: number;
+  address: string;
+};
 
 const registerPage = () => {
+  const { handleSubmit, register } = useForm();
+
+  const onSubmit: SubmitHandler<RegisterInfo> = (data) => {
+    console.log(data);
+  };
   return (
     <Container>
       <Stack
@@ -44,10 +58,11 @@ const registerPage = () => {
             </Box>
           </Stack>
           <Box>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2} my={2}>
                 <Grid item md={12}>
                   <TextField
+                    {...register("name")}
                     label="Name"
                     type="text"
                     size="small"
@@ -56,6 +71,7 @@ const registerPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <TextField
+                    {...register("email")}
                     label="Email"
                     type="email"
                     variant="outlined"
@@ -65,6 +81,7 @@ const registerPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <TextField
+                    {...register("password")}
                     label="Password"
                     type="password"
                     variant="outlined"
@@ -74,6 +91,7 @@ const registerPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <TextField
+                    {...register("CNumber")}
                     label="Contact Number"
                     type="number"
                     variant="outlined"
@@ -83,6 +101,7 @@ const registerPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <TextField
+                    {...register("address")}
                     label="Address"
                     variant="outlined"
                     size="small"
