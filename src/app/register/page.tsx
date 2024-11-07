@@ -12,20 +12,57 @@ import assets from "@/assets";
 import Image from "next/image";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { registerPatients } from "@/services/actions/registerPatients";
+import { modifyPayload } from "@/utils/modifyPayload";
 
-type RegisterInfo = {
+// type RegisterInfo = {
+//   name: string;
+//   email: string;
+//   password: string;
+//   contactNumber: number;
+//   address: string;
+// };
+
+interface IPatient {
   name: string;
   email: string;
-  password: string;
-  contactNumber: number;
+  contactNumber: string; // change to string
   address: string;
-};
+}
 
-const registerPage = () => {
-  const { handleSubmit, register } = useForm<RegisterInfo>();
+interface IRegisterInfo {
+  password: string;
+  patient: IPatient;
+}
 
-  const onSubmit: SubmitHandler<RegisterInfo> = (data) => {
-    console.log(data);
+const RegisterPage = () => {
+  const { handleSubmit, register } = useForm<IRegisterInfo>();
+
+  const onSubmit: SubmitHandler<IRegisterInfo> = async (data) => {
+    // console.log(data);
+
+    // Modify form data for sending to the server
+    const modifiedData = modifyPayload(data);
+    console.log(modifiedData);
+
+    // Sending from data to the server || Why i send modified data to another function rather
+    // than directly sending data to the server ?
+    try {
+      const reposeFromPatients = await fetch(
+        `http://localhost:5000/api/v1/user/create-patient`,
+        {
+          method: "POST",
+          body: modifiedData, // already JSON.stringified
+          cache: "no-store",
+        }
+      );
+      const patientResponseFromServer = await reposeFromPatients.json();
+
+      // const patientResponseFromServer = await registerPatients(modifiedData);
+      console.log(patientResponseFromServer);
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
   return (
     <Container>
@@ -63,7 +100,7 @@ const registerPage = () => {
               <Grid container spacing={2} my={2}>
                 <Grid item md={12}>
                   <TextField
-                    {...register("name")}
+                    {...register("patient.name")}
                     label="Name"
                     type="text"
                     size="small"
@@ -72,7 +109,7 @@ const registerPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <TextField
-                    {...register("email")}
+                    {...register("patient.email")}
                     label="Email"
                     type="email"
                     variant="outlined"
@@ -92,7 +129,7 @@ const registerPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <TextField
-                    {...register("contactNumber")}
+                    {...register("patient.contactNumber")}
                     label="Contact Number"
                     type="number"
                     variant="outlined"
@@ -102,7 +139,7 @@ const registerPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <TextField
-                    {...register("address")}
+                    {...register("patient.address")}
                     label="Address"
                     variant="outlined"
                     size="small"
@@ -133,4 +170,4 @@ const registerPage = () => {
   );
 };
 
-export default registerPage;
+export default RegisterPage;
