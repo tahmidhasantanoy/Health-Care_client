@@ -1,3 +1,4 @@
+//  Server action function
 "use server"; // use so that it render as server side || i know if you not declare anything
 // it will render as server side
 
@@ -6,7 +7,7 @@ export const registerPatients = async (modifyPayload: FormData) => {
 
   console.log(process.env.NEXT_PUBLIC_BACKEND_API_URL);
   const reposeFromPatients = await fetch(
-    `http://localhost:5000/api/v1/user/create-patient`,
+    `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user/create-patient`,
     {
       method: "POST",
       body: modifyPayload, // already JSON.stringified

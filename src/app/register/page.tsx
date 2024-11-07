@@ -48,17 +48,7 @@ const RegisterPage = () => {
     // Sending from data to the server || Why i send modified data to another function rather
     // than directly sending data to the server ?
     try {
-      const reposeFromPatients = await fetch(
-        `http://localhost:5000/api/v1/user/create-patient`,
-        {
-          method: "POST",
-          body: modifiedData, // already JSON.stringified
-          cache: "no-store",
-        }
-      );
-      const patientResponseFromServer = await reposeFromPatients.json();
-
-      // const patientResponseFromServer = await registerPatients(modifiedData);
+      const patientResponseFromServer = await registerPatients(modifiedData);
       console.log(patientResponseFromServer);
     } catch (err: any) {
       console.log(err.message);
