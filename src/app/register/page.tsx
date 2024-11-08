@@ -15,6 +15,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { registerPatients } from "@/services/actions/registerPatients";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // type RegisterInfo = {
 //   name: string;
@@ -27,7 +28,7 @@ import { toast } from "sonner";
 interface IPatient {
   name: string;
   email: string;
-  contactNumber: string; // change to string
+  contactNumber: string;
   address: string;
 }
 
@@ -37,6 +38,7 @@ interface IRegisterInfo {
 }
 
 const RegisterPage = () => {
+  const router = useRouter();
   const { handleSubmit, register } = useForm<IRegisterInfo>();
 
   const onSubmit: SubmitHandler<IRegisterInfo> = async (data) => {
@@ -52,6 +54,7 @@ const RegisterPage = () => {
       const patientResponseFromServer = await registerPatients(modifiedData);
       if (patientResponseFromServer.success) {
         toast.success(patientResponseFromServer.message);
+        router.push("/login");
       }
     } catch (err: any) {
       console.log(err.message);

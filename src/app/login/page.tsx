@@ -12,11 +12,13 @@ import Image from "next/image";
 import asstes from "@/assets";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { Metadata } from "next";
 
 type Inputs = {
   email: string;
   password: string;
 };
+
 const Login = () => {
   const {
     register,
@@ -24,9 +26,16 @@ const Login = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
+
+    try {
+      
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
+
   return (
     <Container>
       <Stack
