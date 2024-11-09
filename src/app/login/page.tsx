@@ -12,9 +12,9 @@ import Image from "next/image";
 import asstes from "@/assets";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Metadata } from "next";
+import { loginPatients } from "@/services/actions/loginPatients";
 
-type Inputs = {
+export type Inputs = {
   email: string;
   password: string;
 };
@@ -26,10 +26,17 @@ const Login = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<Inputs> = async(data) => {
     console.log(data);
 
+    // modify data to send to server
+    // const modifiedData = loginPatients(data);
+    // console.log(modifiedData);
+
     try {
+      const patientResponseFromServer = await loginPatients(data);
+      console.log(patientResponseFromServer);
+
       
     } catch (err: any) {
       console.log(err.message);
@@ -75,6 +82,7 @@ const Login = () => {
                 <TextField
                   {...register("password", { required: true })}
                   label="Password"
+                  type="password"
                   variant="outlined"
                   size="small"
                   fullWidth={true}

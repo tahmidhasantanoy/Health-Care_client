@@ -1,16 +1,14 @@
 //  Server action function
-"use server"; // use so that it render as server side || i know if you not declare anything
-// it will render as server side
+"use server"; // i also use it in react without "use server", why in nextjs i need to use it ?
 
 export const registerPatients = async (modifyPayload: FormData) => {
-  // Because it modify according to form format
+  // type : FormData -> Because it modify according to form format
 
-  console.log(process.env.NEXT_PUBLIC_BACKEND_API_URL);
   const reposeFromPatients = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/user/create-patient`,
     {
       method: "POST",
-      body: modifyPayload, // already JSON.stringified
+      body: modifyPayload, // already JSON.stringified || why not use "content-type: application/json" ?
       cache: "no-store",
     }
   );
