@@ -13,6 +13,7 @@ import asstes from "@/assets";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { loginPatients } from "@/services/actions/loginPatients";
+import { setTokenToLocalStorage } from "@/services/auth.services";
 
 export type Inputs = {
   email: string;
@@ -26,7 +27,7 @@ const Login = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async(data) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
 
     // modify data to send to server
@@ -35,9 +36,10 @@ const Login = () => {
 
     try {
       const patientResponseFromServer = await loginPatients(data);
-      console.log(patientResponseFromServer);
-
       
+      if (patientResponseFromServer?.data?.accessToken) {
+        setTokenToLocalStorage(patientResponseFromServer?.data?.accessToken);
+      }
     } catch (err: any) {
       console.log(err.message);
     }
@@ -107,7 +109,7 @@ const Login = () => {
             }}
           >
             <Typography>
-              Don&apos;t haave an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href={"/register"}>Create an account</Link>
             </Typography>
           </Box>
