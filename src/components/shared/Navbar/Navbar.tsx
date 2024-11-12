@@ -1,7 +1,27 @@
+"use client";
+import {
+  getToekenFromLocalStorage,
+  loggedInCheck,
+  removeUser,
+} from "@/services/auth.services";
+import { jwtDecoder } from "@/utils/jwt";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 
 const Navbar = () => {
+  const userInfo = getToekenFromLocalStorage();
+  console.log(userInfo);
+  const userInfoString = typeof userInfo === "string" ? userInfo : "";
+  const userData = jwtDecoder(userInfoString);
+  console.log(userData);
+
+  // for toggling login | logout
+  console.log(loggedInCheck());
+
+  // logout ->
+  const logOut = removeUser(userInfoString);
+  console.log(logOut);
+
   return (
     <Container>
       <Stack
@@ -20,7 +40,6 @@ const Navbar = () => {
         <Stack direction="row" justifyContent={"space-between"} gap={4}>
           <Typography
             component={Link}
-            
             href={"/consulation"}
             sx={{ textDecoration: "none" }}
           >
@@ -28,7 +47,6 @@ const Navbar = () => {
           </Typography>
           <Typography
             component={Link}
-            
             href={"/Healthplans"}
             sx={{ textDecoration: "none" }}
           >
@@ -36,7 +54,6 @@ const Navbar = () => {
           </Typography>
           <Typography
             component={Link}
-            
             href={"/medicine"}
             sx={{ textDecoration: "none" }}
           >
@@ -44,7 +61,6 @@ const Navbar = () => {
           </Typography>
           <Typography
             component={Link}
-            
             href={"/diagostics"}
             sx={{ textDecoration: "none" }}
           >
@@ -52,16 +68,21 @@ const Navbar = () => {
           </Typography>
           <Typography
             component={Link}
-            
             href={"/ngos"}
             sx={{ textDecoration: "none" }}
           >
             NGOs
           </Typography>
         </Stack>
-        <Button component={Link} href="/login">
-          Login
-        </Button>
+        {userData?.role ? (
+          <Button color="error" href="/" component={Link}>
+            Logout
+          </Button>
+        ) : (
+          <Button component={Link} href="/login">
+            Login
+          </Button>
+        )}
       </Stack>
     </Container>
   );
