@@ -41,7 +41,6 @@ const Login = () => {
     try {
       const patientResponseFromServer = await loginPatients(data);
       console.log(patientResponseFromServer);
-
       if (patientResponseFromServer?.data?.accessToken) {
         setTokenToLocalStorage(patientResponseFromServer?.data?.accessToken);
         toast.success(patientResponseFromServer?.message);

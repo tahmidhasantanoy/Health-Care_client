@@ -16,6 +16,8 @@ import { registerPatients } from "@/services/actions/registerPatients";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { loginPatients } from "@/services/actions/loginPatients";
+import { setTokenToLocalStorage } from "@/services/auth.services";
 
 // type RegisterInfo = {
 //   name: string;
@@ -42,19 +44,31 @@ const RegisterPage = () => {
   const { handleSubmit, register } = useForm<IRegisterInfo>();
 
   const onSubmit: SubmitHandler<IRegisterInfo> = async (data) => {
-    // console.log(data);
 
     // Modify form data for sending to the server
     const modifiedData = modifyPayload(data);
-    console.log(modifiedData);
 
     // Sending from data to the server || Why i send modified data to another function rather
     // than directly sending data to the server ?
     try {
       const patientResponseFromServer = await registerPatients(modifiedData);
       if (patientResponseFromServer.success) {
-        toast.success(patientResponseFromServer.message);
-        router.push("/login");
+        try {
+          const patientResponseFromLoginServer = await loginPatients({
+            email: data?.patient?.email,
+            password: data.password,
+          });
+          if (patientResponseFromLoginServer?.data?.accessToken) {
+            setTokenToLocalStorage(
+              patientResponseFromLoginServer?.data?.accessToken
+            );
+            toast.success(patientResponseFromServer.message);
+            router.push("/");
+          }
+        } catch (err: any) {
+          console.log(err.message);
+          toast.error(err.message);
+        }
       }
     } catch (err: any) {
       console.log(err.message);
