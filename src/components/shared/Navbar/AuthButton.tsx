@@ -3,8 +3,8 @@ I want to render it from browser, because it need a localStorage accessToken dat
 Also create a AuthButton component , because lazy loading want to import which compoenent
 is have to show delay.
 
-React try to pre-render HTML but not fount accessToken, 
-## Here i solve react hydration error ##
+React try to pre-render HTML but not found accessToken immidaitly, so it throw error, 
+## Here i solve react hydration error "lazy loading" ##
 */
 import {
   getToekenFromLocalStorage,

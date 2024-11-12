@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import asstes from "@/assets";
 import Link from "next/link";
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { loginPatients } from "@/services/actions/loginPatients";
 import { setTokenToLocalStorage } from "@/services/auth.services";
 import { useRouter } from "next/navigation";
@@ -26,16 +26,13 @@ export type Inputs = {
 const Login = () => {
   const router = useRouter();
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
 
-  // const onSubmit : SubmitHandler<Inputs> = async (data) => {
-  //   console.log(data);
-
-  const onSubmitHandleLogin = async (data: FieldValues) => {
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
 
     // modify data to send to server
@@ -85,9 +82,7 @@ const Login = () => {
               </Typography>
             </Box>
           </Stack>
-          {/* Wrapper of form */}
-          <HealthFormProvider onSubmit={onSubmitHandleLogin}>
-            {/*   onSubmit={handleLogin} */}
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2} my={2}>
               <Grid item md={6}>
                 <TextField
@@ -118,7 +113,7 @@ const Login = () => {
             <Button type="submit" fullWidth>
               Login
             </Button>
-          </HealthFormProvider>
+          </form>
           <Box
             sx={{
               display: "flex",
