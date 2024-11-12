@@ -16,15 +16,17 @@ type TChildren = {
 
 const HealthFormProvider = ({ children, onSubmit }: TChildren) => {
   const methods = useForm();
-  console.log(onSubmit);
+  console.log("provider page -> ", onSubmit);
 
   const wrapperOnSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-    onSubmit?.(data); // why ??
-  }
+    console.log("provider page -> wrapperOnSubmit 1", data);
+    onSubmit?.(data); // call onSubmit function & go login onSubmitHandleLogin
+    methods.reset();
+  };
 
   return (
     <FormProvider {...methods}>
+      {/* Here inputfields data come 1st & call wrapperOnSubmit function  */}
       <form onSubmit={methods.handleSubmit(wrapperOnSubmit)}>
         {/* <form onSubmit={handleSubmit(submit)}>{children}</form> */}
         {/* <NestedInput />  All input are here */}

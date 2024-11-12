@@ -6,7 +6,6 @@ import {
 import { Box, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-// import AuthButton from "./AuthButton";
 import dynamic from "next/dynamic";
 
 const AuthButton = dynamic(() => import("./AuthButton"), { ssr: false });
@@ -19,7 +18,7 @@ const Navbar = () => {
   // const userData = jwtDecoder(userInfoString);
 
   // for toggling login | logout
-  console.log(loggedInCheck());
+  // console.log(loggedInCheck());
 
   // logout ->
   // const logOut = () => {

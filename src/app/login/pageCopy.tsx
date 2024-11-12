@@ -16,7 +16,6 @@ import { loginPatients } from "@/services/actions/loginPatients";
 import { setTokenToLocalStorage } from "@/services/auth.services";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 
 export type Inputs = {
   email: string;
@@ -33,7 +32,7 @@ const Login = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
+    // console.log(data);
 
     // modify data to send to server
     // const modifiedData = loginPatients(data);
@@ -41,7 +40,7 @@ const Login = () => {
 
     try {
       const patientResponseFromServer = await loginPatients(data);
-      console.log(patientResponseFromServer);
+    //   console.log(patientResponseFromServer);
       if (patientResponseFromServer?.data?.accessToken) {
         setTokenToLocalStorage(patientResponseFromServer?.data?.accessToken);
         toast.success(patientResponseFromServer?.message);

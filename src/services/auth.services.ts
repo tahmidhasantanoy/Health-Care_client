@@ -24,7 +24,7 @@ export const removeUser = () => {
 // Checked loggedIn or not
 export const loggedInCheck = () => {
   const authToken = getToekenFromLocalStorage();
-  console.log(authToken);
+  // console.log(authToken);
   if (!authToken || typeof window === "undefined") return !!authKey;
   else return !!authKey;
 };

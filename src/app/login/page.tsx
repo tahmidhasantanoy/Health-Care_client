@@ -17,6 +17,7 @@ import { setTokenToLocalStorage } from "@/services/auth.services";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import HealthFormProvider from "@/components/Forms/HealthFormProvider";
+import HealthInput from "@/components/Forms/HealthInput";
 
 export type Inputs = {
   email: string;
@@ -35,8 +36,9 @@ const Login = () => {
   // const onSubmit : SubmitHandler<Inputs> = async (data) => {
   //   console.log(data);
 
+  // When interpreter hit this line ?
   const onSubmitHandleLogin = async (data: FieldValues) => {
-    console.log(data);
+    console.log("login page -> 2", data);
 
     // modify data to send to server
     // const modifiedData = loginPatients(data);
@@ -44,7 +46,10 @@ const Login = () => {
 
     try {
       const patientResponseFromServer = await loginPatients(data);
-      console.log(patientResponseFromServer);
+      console.log(
+        "login page -> patientResponseFromServer 3",
+        patientResponseFromServer
+      );
       if (patientResponseFromServer?.data?.accessToken) {
         setTokenToLocalStorage(patientResponseFromServer?.data?.accessToken);
         toast.success(patientResponseFromServer?.message);
@@ -90,20 +95,19 @@ const Login = () => {
             {/*   onSubmit={handleLogin} */}
             <Grid container spacing={2} my={2}>
               <Grid item md={6}>
-                <TextField
-                  {...register("email", { required: true })}
+                <HealthInput
+                  name="email"
+                  type="email"
                   label="Email"
-                  variant="outlined"
                   size="small"
                   fullWidth={true}
                 />
               </Grid>
               <Grid item md={6}>
-                <TextField
-                  {...register("password", { required: true })}
+                <HealthInput
+                  name="password"
                   label="Password"
                   type="password"
-                  variant="outlined"
                   size="small"
                   fullWidth={true}
                 />
