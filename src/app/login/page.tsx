@@ -14,6 +14,8 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { loginPatients } from "@/services/actions/loginPatients";
 import { setTokenToLocalStorage } from "@/services/auth.services";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export type Inputs = {
   email: string;
@@ -21,6 +23,8 @@ export type Inputs = {
 };
 
 const Login = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -36,9 +40,12 @@ const Login = () => {
 
     try {
       const patientResponseFromServer = await loginPatients(data);
-      
+      console.log(patientResponseFromServer);
+
       if (patientResponseFromServer?.data?.accessToken) {
         setTokenToLocalStorage(patientResponseFromServer?.data?.accessToken);
+        toast.success(patientResponseFromServer?.message);
+        router.push("/");
       }
     } catch (err: any) {
       console.log(err.message);

@@ -17,7 +17,7 @@ export const getToekenFromLocalStorage = () => {
 };
 
 // Remove user from the localStorage
-export const removeUser = (authKey: string) => {
+export const removeUser = () => {
   return removeUserFromLocalStorageWithKey(authKey);
 };
 

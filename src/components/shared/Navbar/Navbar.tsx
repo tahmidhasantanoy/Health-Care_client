@@ -7,8 +7,12 @@ import {
 import { jwtDecoder } from "@/utils/jwt";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Navbar = () => {
+  const router = useRouter();
+  const [out, setOut] = useState(false);
   const userInfo = getToekenFromLocalStorage();
   console.log(userInfo);
   const userInfoString = typeof userInfo === "string" ? userInfo : "";
@@ -19,8 +23,11 @@ const Navbar = () => {
   console.log(loggedInCheck());
 
   // logout ->
-  const logOut = removeUser(userInfoString);
-  console.log(logOut);
+  const logOut = () => {
+    removeUser();
+    router.refresh();
+    setOut(true);
+  };
 
   return (
     <Container>
@@ -75,7 +82,7 @@ const Navbar = () => {
           </Typography>
         </Stack>
         {userData?.role ? (
-          <Button color="error" href="/" component={Link}>
+          <Button onClick={logOut} color="error" href="/" component={Link}>
             Logout
           </Button>
         ) : (
