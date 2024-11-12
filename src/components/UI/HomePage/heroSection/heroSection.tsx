@@ -20,7 +20,7 @@ const heroSection = () => {
             left: "-120px",
           }}
         >
-          <Image src={grid} alt="grid" />
+          <Image src={grid} alt="grid" priority/>
         </Box>
         <Box my={2}>
           <Typography variant="h3" component={"h3"} fontWeight={600}>
@@ -55,21 +55,39 @@ const heroSection = () => {
       <Box sx={{ display: "flex", flex: 1, position: "relative" }}>
         {/* Arrow  ok*/}
         <Box sx={{ position: "absolute", left: 160, top: -40 }}>
-          <Image src={arrow} alt="icon image"></Image>
+          <Image src={arrow} alt="icon image" priority={false}></Image>
         </Box>
         {/* Arrow */}
         <Box sx={{ display: "flex", gap: 2 }}>
           <Box mt={4}>
-            <Image width={240} height={380} src={doctor1} alt="icon image" />
+            <Image
+              width={240}
+              height={380}
+              src={doctor1}
+              alt="icon image"
+              priority
+            />
           </Box>
           <Box>
-            <Image width={240} height={350} src={doctor2} alt="icon image" />
+            <Image
+              width={240}
+              height={350}
+              src={doctor2}
+              alt="icon image"
+              priority
+            />
           </Box>
           <Box sx={{ position: "absolute", top: 200, left: 120 }}>
             <Image width={240} height={240} src={doctor3} alt="icon image" />
           </Box>
           <Box sx={{ position: "absolute", top: 280, right: 30, zIndex: -1 }}>
-            <Image width={180} height={180} src={Stetoscope} alt="icon image" />
+            <Image
+              width={180}
+              height={180}
+              src={Stetoscope}
+              alt="icon image"
+              priority
+            />
           </Box>
         </Box>
       </Box>

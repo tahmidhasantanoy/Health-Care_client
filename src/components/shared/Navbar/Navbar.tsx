@@ -2,32 +2,31 @@
 import {
   getToekenFromLocalStorage,
   loggedInCheck,
-  removeUser,
 } from "@/services/auth.services";
-import { jwtDecoder } from "@/utils/jwt";
-import { Box, Button, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+// import AuthButton from "./AuthButton";
+import dynamic from "next/dynamic";
+
+const AuthButton = dynamic(() => import("./AuthButton"), { ssr: false });
 
 const Navbar = () => {
   const router = useRouter();
-  const [out, setOut] = useState(false);
+
   const userInfo = getToekenFromLocalStorage();
-  console.log(userInfo);
   const userInfoString = typeof userInfo === "string" ? userInfo : "";
-  const userData = jwtDecoder(userInfoString);
-  console.log(userData);
+  // const userData = jwtDecoder(userInfoString);
 
   // for toggling login | logout
   console.log(loggedInCheck());
 
   // logout ->
-  const logOut = () => {
-    removeUser();
-    router.refresh();
-    setOut(true);
-  };
+  // const logOut = () => {
+  //   removeUser();
+  //   router.refresh();
+  //   setOut(true);
+  // };
 
   return (
     <Container>
@@ -81,7 +80,7 @@ const Navbar = () => {
             NGOs
           </Typography>
         </Stack>
-        {userData?.role ? (
+        {/* {userData?.role ? (
           <Button onClick={logOut} color="error" href="/" component={Link}>
             Logout
           </Button>
@@ -89,7 +88,8 @@ const Navbar = () => {
           <Button component={Link} href="/login">
             Login
           </Button>
-        )}
+        )} */}
+        <AuthButton />
       </Stack>
     </Container>
   );

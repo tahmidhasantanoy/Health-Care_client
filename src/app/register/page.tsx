@@ -98,6 +98,7 @@ const RegisterPage = () => {
                 alt="choose us image"
                 height={50}
                 width={50}
+                priority
               />
             </Box>
             <Box>

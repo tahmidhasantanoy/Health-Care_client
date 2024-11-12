@@ -67,7 +67,13 @@ const Login = () => {
         >
           <Stack justifyContent={"center"} alignItems={"center"}>
             <Box>
-              <Image src={asstes.svgs.logo} alt="logo" height={50} width={50} />
+              <Image
+                src={asstes.svgs.logo}
+                alt="logo"
+                height={50}
+                width={50}
+                priority
+              />
             </Box>
             <Box>
               <Typography variant="h6" component={"h6"} fontWeight={600}>
