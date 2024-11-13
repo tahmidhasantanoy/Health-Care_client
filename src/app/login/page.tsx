@@ -10,11 +10,20 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 import HealthInput from "@/components/Forms/HealthInput";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export type Inputs = {
   email: string;
   password: string;
 };
+
+
+// create validation schema
+export const ValidationSchema = z.object({
+  email: z.string().email("Please, Enter a valid email"),
+  password: z.string().min(6, "Password must be at least 6 characters long"),
+});
 
 const Login = () => {
   const router = useRouter();
@@ -83,7 +92,12 @@ const Login = () => {
             </Box>
           </Stack>
           {/* Wrapper of form */}
-          <HealthFormProvider onSubmit={onSubmitHandleLogin}>
+          <HealthFormProvider
+            onSubmit={onSubmitHandleLogin}
+            resolver={zodResolver(
+              ValidationSchema
+            )} /* attach | pass validation schema to form */
+          >
             {/*   onSubmit={handleLogin} */}
             <Grid container spacing={2} my={2}>
               <Grid item md={6}>

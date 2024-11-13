@@ -12,6 +12,7 @@ type THealthInputs = {
   sx?: SxProps;
 };
 
+
 const HealthInput = ({
   name,
   label,

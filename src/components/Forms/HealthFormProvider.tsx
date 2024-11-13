@@ -7,13 +7,27 @@ import {
   SubmitHandler,
   FieldValues,
 } from "react-hook-form";
+
+// type declaration of validationSchema
+type TFormConfig = {
+  resolver?: any;
+};
+
 type TChildren = {
   children: React.ReactNode;
   onSubmit: SubmitHandler<FieldValues>;
-};
+} & TFormConfig; // how type merge two type in one type
 
-const HealthFormProvider = ({ children, onSubmit }: TChildren) => {
-  const methods = useForm();
+const HealthFormProvider = ({ children, onSubmit, resolver }: TChildren) => {
+  const formConfig: TFormConfig = {}; // why?
+
+  if (resolver) {
+    formConfig["resolver"] = resolver;
+  }
+
+  const methods = useForm(formConfig); // finally add zod with form
+  // const methods = useForm(); // previous
+
   console.log("provider page -> ", onSubmit); //asunc function show here
 
   const wrapperOnSubmit: SubmitHandler<FieldValues> = (data) => {
