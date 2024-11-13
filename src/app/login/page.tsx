@@ -11,13 +11,13 @@ import { toast } from "sonner";
 import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 import HealthInput from "@/components/Forms/HealthInput";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { zodResolver } from "@hookform/resolvers/zod"; // for showing zod errors
+import { Password } from "@mui/icons-material";
 
 export type Inputs = {
   email: string;
   password: string;
 };
-
 
 // create validation schema
 export const ValidationSchema = z.object({
@@ -95,8 +95,13 @@ const Login = () => {
           <HealthFormProvider
             onSubmit={onSubmitHandleLogin}
             resolver={zodResolver(
+              /* attach | pass validation schema to form */
               ValidationSchema
-            )} /* attach | pass validation schema to form */
+            )}
+            defaultValues={{
+              /* For showing zod errors messages */ email: "",
+              password: "",
+            }}
           >
             {/*   onSubmit={handleLogin} */}
             <Grid container spacing={2} my={2}>
@@ -105,7 +110,7 @@ const Login = () => {
                   name="email"
                   label="Email"
                   placeholder="Enter your email"
-                  required={true}
+                  // required={true}
                   type="email"
                   size="small"
                   fullWidth={true}
@@ -117,7 +122,7 @@ const Login = () => {
                   name="password"
                   label="Password"
                   placeholder="Enter password"
-                  required={true}
+                  // required={true}
                   type="password"
                   size="small"
                   fullWidth={true}

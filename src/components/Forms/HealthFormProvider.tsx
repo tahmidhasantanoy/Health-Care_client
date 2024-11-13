@@ -11,6 +11,7 @@ import {
 // type declaration of validationSchema
 type TFormConfig = {
   resolver?: any;
+  defaultValues?: Record<string, any>;
 };
 
 type TChildren = {
@@ -18,14 +19,25 @@ type TChildren = {
   onSubmit: SubmitHandler<FieldValues>;
 } & TFormConfig; // how type merge two type in one type
 
-const HealthFormProvider = ({ children, onSubmit, resolver }: TChildren) => {
+const HealthFormProvider = ({
+  children,
+  onSubmit,
+  resolver,
+  defaultValues,
+}: TChildren) => {
   const formConfig: TFormConfig = {}; // why?
 
   if (resolver) {
-    formConfig["resolver"] = resolver;
+    formConfig["resolver"] = resolver; // like insert a object using key
   }
 
-  const methods = useForm(formConfig); // finally add zod with form
+  if (defaultValues) {
+    formConfig["defaultValues"] = defaultValues;
+  }
+
+  const methods = useForm(formConfig); /* finally add zod with form  || 
+    Default values empty || 
+    all methods of useForm */
   // const methods = useForm(); // previous
 
   console.log("provider page -> ", onSubmit); //asunc function show here

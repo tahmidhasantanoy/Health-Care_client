@@ -5,13 +5,12 @@ type THealthInputs = {
   name: string;
   label?: string;
   placeholder: string;
-  required?: boolean;
+  required?: boolean; // optional for showing zod errors
   type?: string;
   size?: "small" | "medium";
   fullWidth: boolean;
   sx?: SxProps;
 };
-
 
 const HealthInput = ({
   name,
@@ -29,7 +28,7 @@ const HealthInput = ({
     <Controller
       control={control}
       name={name} /* By using this name, we can access the value */
-      render={({ field }) => (
+      render={({ field, fieldState: { error } }) => (
         <TextField
           {...field} // spread the field props which comes from input fields
           sx={{ ...sx }}
@@ -40,6 +39,8 @@ const HealthInput = ({
           size={size}
           fullWidth={fullWidth}
           variant="outlined"
+          error={!!error?.message} // work with boolean type
+          helperText={error?.message} //show error message
         />
       )}
     />
