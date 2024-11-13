@@ -1,17 +1,23 @@
 "use client";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import assets from "@/assets";
 import Image from "next/image";
 import Link from "next/link";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { registerPatients } from "@/services/actions/registerPatients";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { loginPatients } from "@/services/actions/loginPatients";
 import { setTokenToLocalStorage } from "@/services/auth.services";
-import HealthFormProvider from "@/components/Forms/HealthFormProvider";
-import HealthInput from "@/components/Forms/HealthInput";
 
 // type RegisterInfo = {
 //   name: string;
@@ -35,10 +41,9 @@ interface IRegisterInfo {
 
 const RegisterPage = () => {
   const router = useRouter();
-  // const { handleSubmit, register } = useForm<IRegisterInfo>();
+  const { handleSubmit, register } = useForm<IRegisterInfo>();
 
-  const onSubmitHandleRegister = async (data: FieldValues) => {
-    console.log("register page -> 2", data);
+  const onSubmit: SubmitHandler<IRegisterInfo> = async (data) => {
 
     // Modify form data for sending to the server
     const modifiedData = modifyPayload(data);
@@ -47,10 +52,6 @@ const RegisterPage = () => {
     // than directly sending data to the server ?
     try {
       const patientResponseFromServer = await registerPatients(modifiedData);
-      console.log(
-        "register page -> patientResponseFromServer 3",
-        patientResponseFromServer
-      );
       if (patientResponseFromServer.success) {
         try {
           const patientResponseFromLoginServer = await loginPatients({
@@ -107,11 +108,11 @@ const RegisterPage = () => {
             </Box>
           </Stack>
           <Box>
-            <HealthFormProvider onSubmit={onSubmitHandleRegister}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2} my={2}>
                 <Grid item md={12}>
-                  <HealthInput
-                    name="patient.name"
+                  <TextField
+                    {...register("patient.name")}
                     label="Name"
                     type="text"
                     size="small"
@@ -119,36 +120,40 @@ const RegisterPage = () => {
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <HealthInput
-                    name="patient.email"
+                  <TextField
+                    {...register("patient.email")}
                     label="Email"
                     type="email"
+                    variant="outlined"
                     size="small"
                     fullWidth={true}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <HealthInput
-                    name="password"
+                  <TextField
+                    {...register("password")}
                     label="Password"
                     type="password"
+                    variant="outlined"
                     size="small"
                     fullWidth={true}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <HealthInput
-                    name="patient.contactNumber"
+                  <TextField
+                    {...register("patient.contactNumber")}
                     label="Contact Number"
                     type="number"
+                    variant="outlined"
                     size="small"
                     fullWidth={true}
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <HealthInput
-                    name="patient.address"
+                  <TextField
+                    {...register("patient.address")}
                     label="Address"
+                    variant="outlined"
                     size="small"
                     fullWidth={true}
                   />
@@ -169,7 +174,7 @@ const RegisterPage = () => {
                   </Box>
                 </Grid>
               </Grid>
-            </HealthFormProvider>
+            </form>
           </Box>
         </Box>
       </Stack>

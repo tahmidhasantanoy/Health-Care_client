@@ -1,7 +1,11 @@
 //  Server action function
-"use server"; // i also use it in react without "use server", why in nextjs i need to use it ?
+"use server";
+import { FieldValues } from "react-hook-form";
+
+// i also use it in react without "use server", why in nextjs i need to use it ?
 
 export const registerPatients = async (modifyPayload: FormData) => {
+  // export const registerPatients = async (modifyPayload: FieldValues) => {
   // type : FormData -> Because it modify according to form format
 
   const reposeFromPatients = await fetch(

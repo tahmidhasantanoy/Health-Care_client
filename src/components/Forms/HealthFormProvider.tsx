@@ -4,11 +4,9 @@ so that we don't have to repeat code */
 import {
   useForm,
   FormProvider,
-  useFormContext,
   SubmitHandler,
   FieldValues,
 } from "react-hook-form";
-
 type TChildren = {
   children: React.ReactNode;
   onSubmit: SubmitHandler<FieldValues>;
@@ -16,11 +14,17 @@ type TChildren = {
 
 const HealthFormProvider = ({ children, onSubmit }: TChildren) => {
   const methods = useForm();
-  console.log("provider page -> ", onSubmit);
+  console.log("provider page -> ", onSubmit); //asunc function show here
 
   const wrapperOnSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log("provider page -> wrapperOnSubmit 1", data);
-    onSubmit?.(data); // call onSubmit function & go login onSubmitHandleLogin
+    /* 
+    ContactNumber: "45353"
+    adress: undefined
+    email: "g@gmail.com"
+    name: undefined
+    password: "Asdf11!"  */
+    onSubmit?.(data); // call onSubmit function & go login | register onSubmitHandleLogin
     methods.reset();
   };
 

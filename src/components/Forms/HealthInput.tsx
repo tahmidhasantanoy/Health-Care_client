@@ -25,7 +25,7 @@ const HealthInput = ({
       name={name} /* By using this name, we can access the value */
       render={({ field }) => (
         <TextField
-          {...field} // spread the field props
+          {...field} // spread the field props which comes from input fields
           label={label}
           type={type}
           variant="outlined"
