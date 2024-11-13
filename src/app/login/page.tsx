@@ -89,16 +89,21 @@ const Login = () => {
               <Grid item md={6}>
                 <HealthInput
                   name="email"
-                  type="email"
                   label="Email"
+                  placeholder="Enter your email"
+                  required={true}
+                  type="email"
                   size="small"
                   fullWidth={true}
+                  sx={{}}
                 />
               </Grid>
               <Grid item md={6}>
                 <HealthInput
                   name="password"
                   label="Password"
+                  placeholder="Enter password"
+                  required={true}
                   type="password"
                   size="small"
                   fullWidth={true}

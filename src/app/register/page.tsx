@@ -113,6 +113,7 @@ const RegisterPage = () => {
                   <HealthInput
                     name="patient.name"
                     label="Name"
+                    placeholder="Enter your name"
                     type="text"
                     size="small"
                     fullWidth={true}
@@ -122,6 +123,7 @@ const RegisterPage = () => {
                   <HealthInput
                     name="patient.email"
                     label="Email"
+                    placeholder="Enter your email"
                     type="email"
                     size="small"
                     fullWidth={true}
@@ -131,6 +133,7 @@ const RegisterPage = () => {
                   <HealthInput
                     name="password"
                     label="Password"
+                    placeholder="Enter your password"
                     type="password"
                     size="small"
                     fullWidth={true}
@@ -140,6 +143,7 @@ const RegisterPage = () => {
                   <HealthInput
                     name="patient.contactNumber"
                     label="Contact Number"
+                    placeholder="Type your number"
                     type="number"
                     size="small"
                     fullWidth={true}
@@ -149,6 +153,7 @@ const RegisterPage = () => {
                   <HealthInput
                     name="patient.address"
                     label="Address"
+                    placeholder="Enter your address"
                     size="small"
                     fullWidth={true}
                   />
