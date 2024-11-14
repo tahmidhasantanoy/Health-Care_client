@@ -12,7 +12,7 @@ import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 import HealthInput from "@/components/Forms/HealthInput";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"; // for showing zod errors
-import { Password } from "@mui/icons-material";
+import { useState } from "react";
 
 export type Inputs = {
   email: string;
@@ -27,6 +27,7 @@ export const ValidationSchema = z.object({
 
 const Login = () => {
   const router = useRouter();
+  const [error, setError] = useState("");
 
   // const {
   //   register,
@@ -55,6 +56,8 @@ const Login = () => {
         setTokenToLocalStorage(patientResponseFromServer?.data?.accessToken);
         toast.success(patientResponseFromServer?.message);
         router.push("/");
+      } else {
+        setError(patientResponseFromServer?.message);
       }
     } catch (err: any) {
       console.log(err.message);
@@ -91,6 +94,22 @@ const Login = () => {
               </Typography>
             </Box>
           </Stack>
+          {error && (
+            <Box>
+              <Typography
+                textAlign={"center"}
+                sx={{
+                  // justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "red",
+                  color: "white",
+                  padding: "2px 4px",
+                }}
+              >
+                {error}
+              </Typography>
+            </Box>
+          )}
           {/* Wrapper of form */}
           <HealthFormProvider
             onSubmit={onSubmitHandleLogin}
