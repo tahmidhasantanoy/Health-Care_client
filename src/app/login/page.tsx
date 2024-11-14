@@ -22,7 +22,7 @@ export type Inputs = {
 // create validation schema
 export const ValidationSchema = z.object({
   email: z.string().email("Please, Enter a valid email"),
-  password: z.string().min(6, "Password must be at least 6 characters long"),
+  password: z.string().min(6, "Password must be at least 6 characters long."),
 });
 
 const Login = () => {

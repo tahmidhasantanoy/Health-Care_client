@@ -12,6 +12,8 @@ import { loginPatients } from "@/services/actions/loginPatients";
 import { setTokenToLocalStorage } from "@/services/auth.services";
 import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 import HealthInput from "@/components/Forms/HealthInput";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // type RegisterInfo = {
 //   name: string;
@@ -32,6 +34,17 @@ interface IRegisterInfo {
   password: string;
   patient: IPatient;
 }
+
+// Zod validation Schema
+const ValidationSchema = z.object({
+  patient: z.object({
+    name: z.string(),
+    email: z.string().email("Enter a valid email address."),
+    contactNumber: z.string(),
+    address: z.string(),
+  }),
+  password: z.string().min(6, "Password must be at least 6 characters long."),
+});
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -107,13 +120,26 @@ const RegisterPage = () => {
             </Box>
           </Stack>
           <Box>
-            <HealthFormProvider onSubmit={onSubmitHandleRegister}>
+            <HealthFormProvider
+              onSubmit={onSubmitHandleRegister}
+              resolver={zodResolver(ValidationSchema)}
+              defaultValues={{
+                patient: {
+                  name: "",
+                  email: "",
+                  contactNumber: "",
+                  address: "",
+                },
+                password: "",
+              }}
+            >
               <Grid container spacing={2} my={2}>
                 <Grid item md={12}>
                   <HealthInput
                     name="patient.name"
                     label="Name"
                     placeholder="Enter your name"
+                    // required={true}
                     type="text"
                     size="small"
                     fullWidth={true}
@@ -124,6 +150,7 @@ const RegisterPage = () => {
                     name="patient.email"
                     label="Email"
                     placeholder="Enter your email"
+                    // required={true}
                     type="email"
                     size="small"
                     fullWidth={true}
@@ -134,6 +161,7 @@ const RegisterPage = () => {
                     name="password"
                     label="Password"
                     placeholder="Enter your password"
+                    // required={true}
                     type="password"
                     size="small"
                     fullWidth={true}
@@ -144,6 +172,7 @@ const RegisterPage = () => {
                     name="patient.contactNumber"
                     label="Contact Number"
                     placeholder="Type your number"
+                    // required={true}
                     type="number"
                     size="small"
                     fullWidth={true}

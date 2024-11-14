@@ -25,8 +25,12 @@ const HealthFormProvider = ({
   resolver,
   defaultValues,
 }: TChildren) => {
-  const formConfig: TFormConfig = {}; // why?
+  // const formConfig: TFormConfig = {}; // why?
+  const formConfig = { resolver, defaultValues };
 
+  // if (resolver) {
+  //   formConfig["resolver"] = resolver;
+  // }
   if (resolver) {
     formConfig["resolver"] = resolver; // like insert a object using key
   }
@@ -35,7 +39,8 @@ const HealthFormProvider = ({
     formConfig["defaultValues"] = defaultValues;
   }
 
-  const methods = useForm(formConfig); /* finally add zod with form  || 
+  const methods =
+    useForm(formConfig); /* finally add zod validation with form  || 
     Default values empty || 
     all methods of useForm */
   // const methods = useForm(); // previous
