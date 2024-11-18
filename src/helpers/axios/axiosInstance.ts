@@ -5,9 +5,11 @@ import { getTokenFromLocalStorageWithKey } from "@/utils/local-storage";
 import axios from "axios";
 
 const axiosInstance = axios.create();
-axiosInstance.defaults.headers.post["Content-Type"] = "application/json";
-axiosInstance.defaults.headers["Accept"] = "application/json";
-axiosInstance.defaults.timeout = 60000;
+axiosInstance.defaults.headers.post["Content-Type"] =
+  "application/json"; /* 32-10 Add headers {"Content-Type"} = "application/json";*/
+axiosInstance.defaults.headers["Accept"] =
+  "application/json"; /* Get data as headers ["Accept"] = "application/json"; */
+axiosInstance.defaults.timeout = 60000; /* 60 seconds time */
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(
