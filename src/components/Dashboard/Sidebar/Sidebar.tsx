@@ -30,7 +30,7 @@ const Sidebar = () => {
     setUserRole(role as string);
   }, [userInfo]);
 
-  console.log(userInfo);
+  // console.log(userInfo);
   // const drawer = (
   //   <List>
   //     {/* All the menues comes here from somewhere */}
