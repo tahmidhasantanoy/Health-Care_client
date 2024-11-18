@@ -1,3 +1,4 @@
+/* It's a function that decodes a JWT token */
 import { jwtDecode } from "jwt-decode";
 interface IDecodedToken {
   exp: number;
