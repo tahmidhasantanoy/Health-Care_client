@@ -15,25 +15,37 @@ import assets from "@/assets";
 import Link from "next/link";
 import { drawerItems } from "@/utils/drawerItems";
 import { TUserRole } from "@/types";
+import SidebarItems from "./SidebarItems";
+import { getToekenFromLocalStorage } from "@/services/auth.services";
+import { jwtDecoder } from "@/utils/jwt";
+import { useEffect, useState } from "react";
 
 const Sidebar = () => {
-  const drawer = (
-    <>
-      <List>
-        {/* All the menues comes here from somewhere */}
-        {drawerItems("admin" as TUserRole).map((item, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </>
-  );
+  const [userRole, setUserRole] = useState("");
+  const authdData = getToekenFromLocalStorage();
+  const userInfo = jwtDecoder(authdData as string);
+
+  useEffect(() => {
+    const role = userInfo?.role;
+    setUserRole(role as string);
+  }, [userInfo]);
+
+  console.log(userInfo);
+  // const drawer = (
+  //   <List>
+  //     {/* All the menues comes here from somewhere */}
+  //     {drawerItems("admin" as TUserRole).map((item, index) => (
+  //       <ListItem key={index} disablePadding>
+  //         <ListItemButton>
+  //           <ListItemIcon>
+  //             {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+  //           </ListItemIcon>
+  //           <ListItemText primary={item.title} />
+  //         </ListItemButton>
+  //       </ListItem>
+  //     ))}
+  //   </List>
+  // );
 
   return (
     <>
@@ -55,7 +67,16 @@ const Sidebar = () => {
           Health Care
         </Typography>
       </Stack>
-      {drawer}
+      {/* {drawer} */}
+      <List>
+        {/* All the menues comes here from somewhere */}
+        {userInfo &&
+          drawerItems(userRole as TUserRole).map((item, index) => (
+            // {drawerItems("doctor" as TUserRole).map((item, index) => (
+            // For implementing Link
+            <SidebarItems key={index} item={item} />
+          ))}
+      </List>
     </>
   );
 };

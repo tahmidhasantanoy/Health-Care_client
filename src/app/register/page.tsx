@@ -75,7 +75,7 @@ const RegisterPage = () => {
               patientResponseFromLoginServer?.data?.accessToken
             );
             toast.success(patientResponseFromServer.message);
-            router.push("/");
+            router.push("/dashboard");
           }
         } catch (err: any) {
           console.log(err.message);

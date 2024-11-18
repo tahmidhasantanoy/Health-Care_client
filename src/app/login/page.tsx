@@ -55,7 +55,7 @@ const Login = () => {
       if (patientResponseFromServer?.data?.accessToken) {
         setTokenToLocalStorage(patientResponseFromServer?.data?.accessToken);
         toast.success(patientResponseFromServer?.message);
-        router.push("/");
+        router.push("/dashboard");
       } else {
         setError(patientResponseFromServer?.message);
       }
