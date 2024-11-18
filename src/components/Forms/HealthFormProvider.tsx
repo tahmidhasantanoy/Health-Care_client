@@ -28,9 +28,6 @@ const HealthFormProvider = ({
   // const formConfig: TFormConfig = {}; // why?
   const formConfig = { resolver, defaultValues };
 
-  // if (resolver) {
-  //   formConfig["resolver"] = resolver;
-  // }
   if (resolver) {
     formConfig["resolver"] = resolver; // like insert a object using key
   }
@@ -45,16 +42,11 @@ const HealthFormProvider = ({
     all methods of useForm */
   // const methods = useForm(); // previous
 
-  console.log("provider page -> ", onSubmit); //asunc function show here
+  console.log("provider page -> ", onSubmit); //async function show here
 
   const wrapperOnSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log("provider page -> wrapperOnSubmit 1", data);
-    /* 
-    ContactNumber: "45353"
-    adress: undefined
-    email: "g@gmail.com"
-    name: undefined
-    password: "Asdf11!"  */
+
     onSubmit?.(data); // call onSubmit function & go login | register onSubmitHandleLogin
     methods.reset();
   };
