@@ -4,7 +4,7 @@ import { SvgIconProps } from "@mui/material";
 export type TMeta = {
   page: number;
   limit: number;
-  total: number;
+  total: number; // memorize type
 };
 
 // New declaration of type
@@ -18,4 +18,19 @@ export type TDrawerMenus = {
   parentPath?: string;
   icon?: React.ComponentType<SvgIconProps>;
   child?: TDrawerMenus[];
+};
+
+export type TResponseObjectForSuccess = {
+  data: any;
+  meta: TMeta;
+};
+
+interface IError{
+  path : string
+  message  : number | string
+}
+export type TResponseObjectForError = {
+  statusCode: number;
+  message: string;
+  errorMessage: IError[];
 };
