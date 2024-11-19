@@ -17,6 +17,8 @@ const Specialist = async () => {
   const specialists = await responseFromSpecialist.json();
   const allSpecialists = specialists.data;
 
+  console.log(allSpecialists);
+
   return (
     <Container sx={{ my: 4 }}>
       <Box sx={{ textAlign: "center" }}>
@@ -31,9 +33,12 @@ const Specialist = async () => {
         </Box>
         {/* Show all specialists */}
         <Stack direction={"row"} gap={4} my={4}>
-          {allSpecialists.slice(0, 6).map((specialist: SpecialistType) => (
-            <SingleSpecialist key={specialist.id} specialist={specialist} />
-          ))}
+          {allSpecialists &&
+            allSpecialists
+              .slice(0, 6)
+              .map((specialist: SpecialistType) => (
+                <SingleSpecialist key={specialist.id} specialist={specialist} />
+              ))}
         </Stack>
         <Button variant="outlined">View All</Button>
       </Box>

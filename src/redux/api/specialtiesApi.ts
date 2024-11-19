@@ -12,11 +12,16 @@ const createSpecialistApi = baseApi.injectEndpoints({
         contentType: "multipart/form-data",
         data: data, //data
       }),
-
-      
+    }),
+    getAllSpecialist: build.query({
+      query: () => ({
+        url: "/specialties",
+        method: "GET",
+      }),
     }),
   }),
-  overrideExisting: false,
+  // overrideExisting: false,
 });
 
-export const { useCreateSpecialityMutation } = createSpecialistApi;
+export const { useCreateSpecialityMutation, useGetAllSpecialistQuery } =
+  createSpecialistApi;

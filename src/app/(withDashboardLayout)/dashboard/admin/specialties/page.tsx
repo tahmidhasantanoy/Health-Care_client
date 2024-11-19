@@ -2,9 +2,18 @@
 import { Box, Button, Stack, TextField } from "@mui/material";
 import SpecialistModal from "./components/SpecialistModal";
 import { useState } from "react";
+import { useGetAllSpecialistQuery } from "@/redux/api/specialtiesApi";
 
 const SpecialistPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const {
+    data: allSpecialist,
+    isLoading,
+    isError,
+  } = useGetAllSpecialistQuery({});
+
+  console.log(allSpecialist);
+
   return (
     <Box>
       <Stack direction={"row"} justifyContent={"space-between"}>
