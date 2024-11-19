@@ -32,6 +32,7 @@ export default function Modal({
   setOpen,
   title,
   children,
+  sx,
 }: ISpecialistModalProps) {
   //   const [open, setOpen] = React.useState(false);
 
@@ -52,6 +53,7 @@ export default function Modal({
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        sx={{ ...sx }}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           {title}
@@ -69,11 +71,11 @@ export default function Modal({
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>{children}</DialogContent>
-        <DialogActions>
+        {/* <DialogActions>
           <Button autoFocus onClick={handleClose}>
             Save changes
           </Button>
-        </DialogActions>
+        </DialogActions> */}
       </BootstrapDialog>
     </React.Fragment>
   );
