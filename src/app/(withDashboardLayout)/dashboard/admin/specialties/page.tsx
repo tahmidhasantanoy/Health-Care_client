@@ -6,13 +6,10 @@ import { useGetAllSpecialistQuery } from "@/redux/api/specialtiesApi";
 
 const SpecialistPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const {
-    data: allSpecialist,
-    isLoading,
-    isError,
-  } = useGetAllSpecialistQuery({});
+  const { data : allSpecialist, isLoading, isError } = useGetAllSpecialistQuery({});
 
   console.log(allSpecialist);
+
 
   return (
     <Box>
