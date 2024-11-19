@@ -2,7 +2,10 @@
 import { Box, Button, IconButton, Stack, TextField } from "@mui/material";
 import SpecialistModal from "./components/SpecialistModal";
 import { useState } from "react";
-import { useGetAllSpecialistQuery } from "@/redux/api/specialtiesApi";
+import {
+  useDeleteSpecialistMutation,
+  useGetAllSpecialistQuery,
+} from "@/redux/api/specialtiesApi";
 import { DataGrid, GridColDef, GridDeleteIcon } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
@@ -10,6 +13,7 @@ import assets from "@/assets/svgs/Cardiology.svg";
 
 const SpecialistPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [deleteSpecialist] = useDeleteSpecialistMutation();
   const {
     data: allSpecialist,
     isLoading,
@@ -18,8 +22,15 @@ const SpecialistPage = () => {
 
   console.log(allSpecialist);
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     console.log(id);
+
+    try {
+      const responseFromSpecialist = await deleteSpecialist(id);
+      console.log(responseFromSpecialist);
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   const columns: GridColDef[] = [

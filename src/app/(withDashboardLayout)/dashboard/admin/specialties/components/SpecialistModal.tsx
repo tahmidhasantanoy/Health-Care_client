@@ -5,7 +5,6 @@ import Modal from "@/components/shared/Modal/Modal";
 import { useCreateSpecialityMutation } from "@/redux/api/specialtiesApi";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
-import { asyncThunkCreator } from "@reduxjs/toolkit";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 

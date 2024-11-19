@@ -13,7 +13,7 @@ const createSpecialistApi = baseApi.injectEndpoints({
         contentType: "multipart/form-data",
         data: data, //data
       }),
-      invalidatesTags: [tagTypes.Specialists],
+      invalidatesTags: [tagTypes.Specialists], // don't cache data
     }),
     getAllSpecialist: build.query({
       query: () => ({
@@ -21,11 +21,21 @@ const createSpecialistApi = baseApi.injectEndpoints({
         method: "GET",
       }),
       // providesTags: ["specialists"],
-      providesTags: [tagTypes.Specialists], // from baseApi
+      providesTags: [tagTypes.Specialists], // cache data || from baseApi
+    }),
+    deleteSpecialist: build.mutation({
+      query: (id) => ({
+        url: `/specialties/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.Specialists], // don't cache data
     }),
   }),
   // overrideExisting: false,
 });
 
-export const { useCreateSpecialityMutation, useGetAllSpecialistQuery } =
-  createSpecialistApi;
+export const {
+  useCreateSpecialityMutation,
+  useGetAllSpecialistQuery,
+  useDeleteSpecialistMutation,
+} = createSpecialistApi;
