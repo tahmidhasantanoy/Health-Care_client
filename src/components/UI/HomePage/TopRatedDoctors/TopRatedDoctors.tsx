@@ -15,7 +15,7 @@ const TopRatedDoctors = async () => {
     `http://localhost:5000/api/v1/doctor?limit=3`
   );
   const { data: doctors } = await responseFromDoctors.json();
-  // console.log(doctors);
+  console.log("doctors", doctors);
 
   return (
     <Box

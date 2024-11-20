@@ -20,7 +20,7 @@ const SpecialistPage = () => {
     isError,
   } = useGetAllSpecialistQuery({});
 
-  console.log(allSpecialist);
+  // console.log(allSpecialist);
 
   const handleDelete = async (id: string) => {
     console.log(id);
