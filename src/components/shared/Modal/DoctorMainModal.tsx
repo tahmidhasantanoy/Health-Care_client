@@ -21,6 +21,7 @@ interface IDoctorModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
+  children: React.ReactNode;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -32,10 +33,11 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DoctorModal({
+export default function DoctorMainModal({
   open,
   setOpen,
   title,
+  children,
 }: IDoctorModalProps) {
   // const [open, setOpen] = React.useState(false);
 
@@ -47,9 +49,7 @@ export default function DoctorModal({
     setOpen(false);
   };
 
-  const handleCreateDoctor = () => {
-
-  }
+  const handleCreateDoctor = () => {};
 
   return (
     <React.Fragment>
@@ -75,25 +75,12 @@ export default function DoctorModal({
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
               {title}
             </Typography>
-            <Button autoFocus color="inherit" onClick={handleClose}>
+            {/* <Button type="submit" autoFocus color="inherit" onClick={handleClose}>
               create
-            </Button>
+            </Button> */}
           </Toolbar>
         </AppBar>
-        <Box>
-          <HealthFormProvider onSubmit={handleCreateDoctor} >
-            <Grid container spacing={2}>
-              {/* Start from here */}
-              <Grid item md={6} xs={12}>
-                <HealthInput
-                  name="name"
-                  label="Name"
-                  placeholder="Enter your name"
-                  fullWidth = {true}
-                />
-            </Grid>
-          </HealthFormProvider>
-        </Box>
+        <Box>{children}</Box>
       </Dialog>
     </React.Fragment>
   );

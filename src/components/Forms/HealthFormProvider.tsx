@@ -36,11 +36,11 @@ const HealthFormProvider = ({
     formConfig["defaultValues"] = defaultValues;
   }
 
+  // const methods = useForm(); // previous
   const methods =
     useForm(formConfig); /* finally add zod validation with form  || 
     Default values empty || 
     all methods of useForm */
-  // const methods = useForm(); // previous
 
   console.log("provider page -> ", onSubmit); //async function show here
 

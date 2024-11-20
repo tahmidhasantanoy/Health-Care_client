@@ -40,7 +40,7 @@ const Login = () => {
 
   // When interpreter hit this line ?
   const onSubmitHandleLogin = async (data: FieldValues) => {
-    console.log("login page -> 2", data);
+    // console.log("login page -> 2", data);
 
     // modify data to send to server
     // const modifiedData = loginPatients(data);

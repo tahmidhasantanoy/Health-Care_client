@@ -27,7 +27,7 @@ const SpecialistPage = () => {
 
     try {
       const responseFromSpecialist = await deleteSpecialist(id);
-      console.log(responseFromSpecialist);
+      // console.log(responseFromSpecialist);
     } catch (err: any) {
       console.log(err.message);
     }

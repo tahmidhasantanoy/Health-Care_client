@@ -1,6 +1,6 @@
 "use client";
 import { Box, Button, Stack, TextField } from "@mui/material";
-import DoctorModal from "../../doctor/components/DoctorModal";
+import DoctorModal from "./components/DoctorModal";
 import { useState } from "react";
 
 const DoctorsPage = () => {
@@ -17,7 +17,11 @@ const DoctorsPage = () => {
         </Button>
         <TextField size="small" placeholder="Search doctor" />
       </Stack>
-      <DoctorModal open={isModalOpen} setOpen={setIsModalOpen} title="Create doctor" />
+      <DoctorModal
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
+        title="Create a doctor"
+      />
     </Box>
   );
 };

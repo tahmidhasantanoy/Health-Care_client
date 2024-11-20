@@ -51,7 +51,7 @@ const RegisterPage = () => {
   // const { handleSubmit, register } = useForm<IRegisterInfo>();
 
   const onSubmitHandleRegister = async (data: FieldValues) => {
-    console.log("register page -> 2", data);
+    // console.log("register page -> 2", data);
 
     // Modify form data for sending to the server
     const modifiedData = modifyPayload(data);
@@ -60,10 +60,10 @@ const RegisterPage = () => {
     // than directly sending data to the server ?
     try {
       const patientResponseFromServer = await registerPatients(modifiedData);
-      console.log(
-        "register page -> patientResponseFromServer 3",
-        patientResponseFromServer
-      );
+      // console.log(
+      //   "register page -> patientResponseFromServer 3",
+      //   patientResponseFromServer
+      // );
       if (patientResponseFromServer.success) {
         try {
           const patientResponseFromLoginServer = await loginPatients({

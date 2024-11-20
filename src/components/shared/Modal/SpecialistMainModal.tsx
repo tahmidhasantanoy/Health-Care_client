@@ -27,7 +27,7 @@ interface ISpecialistModalProps {
   sx?: SxProps;
 }
 
-export default function Modal({
+export default function SpecialistMainModal({
   open,
   setOpen,
   title,

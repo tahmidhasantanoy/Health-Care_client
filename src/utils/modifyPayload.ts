@@ -1,9 +1,7 @@
 export const modifyPayload = (values: any) => {
   const obj = { ...values };
-  console.log(obj);
   const file = obj["file"];
   delete obj["file"];
-  console.log(file);
   const data = JSON.stringify(obj);
   const formData = new FormData();
 

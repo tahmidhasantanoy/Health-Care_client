@@ -1,7 +1,7 @@
 import FileUpload from "@/components/Forms/FileUploader";
 import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 import HealthInput from "@/components/Forms/HealthInput";
-import Modal from "@/components/shared/Modal/Modal";
+import Modal from "@/components/shared/Modal/SpecialistMainModal";
 import { useCreateSpecialityMutation } from "@/redux/api/specialtiesApi";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
@@ -21,7 +21,7 @@ const SpecialistModal = ({ open, setOpen }: TSpecialistProps) => {
     const modifiedAsFormData = modifyPayload(data);
     // console.log(modifiedAsFormData);
 
-    // send to something || want to create a separate api for creating specialist with redux
+    // send to something || want to create a separate api with redux for creating specialist 
     try {
       const responseFormSpecialist = await createSpeciality(
         modifiedAsFormData
@@ -31,7 +31,7 @@ const SpecialistModal = ({ open, setOpen }: TSpecialistProps) => {
         setOpen(false);
         toast.success("Specialist created successfully");
       }
-      console.log(responseFormSpecialist);
+      // console.log(responseFormSpecialist);
     } catch (err: any) {
       console.log(err.message);
     }
@@ -58,7 +58,6 @@ const SpecialistModal = ({ open, setOpen }: TSpecialistProps) => {
           </Grid>
           <Grid item md={6} xs={12}>
             <FileUpload name="file" label="File" />{" "}
-            {/* Mauy be problem happend */}
           </Grid>
         </Grid>
         <Button
