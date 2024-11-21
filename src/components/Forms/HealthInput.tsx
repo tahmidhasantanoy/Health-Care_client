@@ -26,7 +26,7 @@ const HealthInput = ({
 
   return (
     <Controller
-      control={control}
+      control={control} // Controller is a bridge between React component and react-hook-form
       name={name} /* By using this name, we can access the value */
       render={({ field, fieldState: { error } }) => (
         <TextField

@@ -17,7 +17,7 @@ const Specialist = async () => {
   const specialists = await responseFromSpecialist.json();
   const allSpecialists = specialists.data;
 
-  console.log(allSpecialists);
+  // console.log(allSpecialists);
 
   return (
     <Container sx={{ my: 4 }}>

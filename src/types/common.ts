@@ -25,12 +25,14 @@ export type TResponseObjectForSuccess = {
   meta: TMeta;
 };
 
-interface IError{
-  path : string
-  message  : number | string
+interface IError {
+  path: string;
+  message: number | string;
 }
 export type TResponseObjectForError = {
   statusCode: number;
   message: string;
   errorMessage: IError[];
 };
+
+export const Gender = ["MALE", "FEMALE"];
