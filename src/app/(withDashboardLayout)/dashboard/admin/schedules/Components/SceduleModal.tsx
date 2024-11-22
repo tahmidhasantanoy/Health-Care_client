@@ -1,3 +1,4 @@
+import HealthDatePicker from "@/components/Forms/HealthDatePicker";
 import Modal from "@/components/shared/Modal/Modal";
 import { Button, Grid, Stack, TextField } from "@mui/material";
 
@@ -10,12 +11,8 @@ const SceduleModal = ({ open, setOpen }: ISceduleModalProps) => {
     <Modal open={open} setOpen={setOpen} title="Create Schedule">
       <Stack direction={"column"} gap={2}>
         <Grid container spacing={2}>
-          <Grid item md={12} xs={6}>
-            <TextField
-              fullWidth
-              size="small"
-              placeholder="Schedule Name"
-            ></TextField>
+          <Grid textAlign={"end"} sx={{ width: "100%" }} item xl={12} md={12} xs={6}>
+            <HealthDatePicker />
           </Grid>
 
           <Grid item md={6} xs={6}></Grid>
