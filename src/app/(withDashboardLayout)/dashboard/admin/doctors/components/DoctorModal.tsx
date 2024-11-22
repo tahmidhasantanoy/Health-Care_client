@@ -1,10 +1,14 @@
+// DONE
 import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 import HealthInput from "@/components/Forms/HealthInput";
 import HealthSelectField from "@/components/Forms/HealthSelectField";
-import DoctorMainModal from "@/components/shared/Modal/DoctorMainModal";
+import Modal from "@/components/shared/Modal/Modal";
+import { useCreateDoctorMutation } from "@/redux/api/doctorsApi";
 import { Gender } from "@/types";
+import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid, Typography } from "@mui/material";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
 interface IDoctorModalProps {
   open: boolean;
@@ -12,6 +16,8 @@ interface IDoctorModalProps {
   title: string;
 }
 const DoctorModal = ({ open, setOpen, title }: IDoctorModalProps) => {
+  const [createDoctor] = useCreateDoctorMutation();
+
   const defaultValues = {
     doctor: {
       email: "",
@@ -30,15 +36,29 @@ const DoctorModal = ({ open, setOpen, title }: IDoctorModalProps) => {
     password: "",
   };
 
-  const handleCreateDoctor = (doctorInfo: FieldValues) => {
-    console.log(doctorInfo);
+  const handleFormSubmit = async (values: FieldValues) => {
+    console.log(values);
+
+    values.doctor.experience = Number(values.doctor.experience);
+    values.doctor.apointmentFee = Number(values.doctor.apointmentFee);
+    const data = modifyPayload(values);
+    try {
+      const res = await createDoctor(data).unwrap();
+      console.log(res);
+      if (res?.id) {
+        toast.success("Doctor created successfully!!!");
+        setOpen(false);
+      }
+    } catch (err: any) {
+      console.error(err);
+    }
   };
 
   return (
     <>
-      <DoctorMainModal open={open} setOpen={setOpen} title={title}>
+      <Modal open={open} setOpen={setOpen} title={title}>
         <HealthFormProvider
-          onSubmit={handleCreateDoctor}
+          onSubmit={handleFormSubmit}
           defaultValues={defaultValues}
           resolver={``}
         >
@@ -171,7 +191,7 @@ const DoctorModal = ({ open, setOpen, title }: IDoctorModalProps) => {
             </Button>
           </Grid>
         </HealthFormProvider>
-      </DoctorMainModal>
+      </Modal>
     </>
   );
 };

@@ -1,3 +1,4 @@
+/* Server path 2 : axiosInstance */
 /* want to create a axios instance. It behave like a middleware */
 import { authKey } from "@/constant/authKey";
 import { TResponseObjectForError, TResponseObjectForSuccess } from "@/types";

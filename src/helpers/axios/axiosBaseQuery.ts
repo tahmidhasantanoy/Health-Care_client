@@ -1,3 +1,5 @@
+/* Server path 1 : axiosBaseQuery */
+
 import { TMeta } from "@/types";
 import type { BaseQueryFn } from "@reduxjs/toolkit/query";
 import axios from "axios";
@@ -8,6 +10,7 @@ import { axiosInstance } from "./axiosInstance";
 export const axiosBaseQuery =
   (
     { baseUrl }: { baseUrl: string } = { baseUrl: "" }
+    // baseUrl from where? : ans -> where we call this function
   ): BaseQueryFn<
     {
       url: string;
@@ -24,7 +27,8 @@ export const axiosBaseQuery =
   async ({ url, method, data, params, headers, contentType }) => {
     try {
       // const result = await axios({
-      const result = await axiosInstance({ // axiostance = for modifying request & response
+      const result = await axiosInstance({
+        // axiostance = for modifying request & response data
         url: baseUrl + url,
         method,
         data,

@@ -1,9 +1,11 @@
-/* Try to inject specialtiesApi endpoints(baseApi/something) with baseApi */
-/* It's a example for creating a new api endpoint */
+/* Server path 4 : specialtiesApi */
+/* Try to inject specialtiesApi as endpoints(baseApi/something) with baseApi */
+/* It's a example(model) for creating a new api endpoint */
+/* ** Search : write code & search(RTK query) in redux toolkit ** */
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
-const createSpecialistApi = baseApi.injectEndpoints({
+const specialistApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     createSpeciality: build.mutation({
       query: (data) => ({
@@ -38,4 +40,4 @@ export const {
   useCreateSpecialityMutation,
   useGetAllSpecialistQuery,
   useDeleteSpecialistMutation,
-} = createSpecialistApi;
+} = specialistApi;

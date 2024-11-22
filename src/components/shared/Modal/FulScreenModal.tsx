@@ -33,7 +33,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DoctorMainModal({
+export default function FullScreenModal({
   open,
   setOpen,
   title,
@@ -49,7 +49,6 @@ export default function DoctorMainModal({
     setOpen(false);
   };
 
-  const handleCreateDoctor = () => {};
 
   return (
     <React.Fragment>

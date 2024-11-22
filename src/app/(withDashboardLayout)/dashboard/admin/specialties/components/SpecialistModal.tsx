@@ -1,7 +1,7 @@
 import FileUpload from "@/components/Forms/FileUploader";
 import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 import HealthInput from "@/components/Forms/HealthInput";
-import Modal from "@/components/shared/Modal/SpecialistMainModal";
+import Modal from "@/components/shared/Modal/Modal";
 import { useCreateSpecialityMutation } from "@/redux/api/specialtiesApi";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { Button, Grid } from "@mui/material";
