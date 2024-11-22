@@ -2,6 +2,7 @@ import HealthDatePicker from "@/components/Forms/HealthDatePicker";
 import HealthFormProvider from "@/components/Forms/HealthFormProvider";
 import HealthTimePicker from "@/components/Forms/HealthTimePicker";
 import Modal from "@/components/shared/Modal/Modal";
+import { useCreateDoctorMutation } from "@/redux/api/doctorsApi";
 import { dateFormatter } from "@/utils/DateFormatter";
 import { timeFormatter } from "@/utils/timeFormatter";
 import { Button, Grid, Stack, TextField } from "@mui/material";
@@ -12,17 +13,31 @@ interface ISceduleModalProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const SceduleModal = ({ open, setOpen }: ISceduleModalProps) => {
-  const handleDatePicker = (data: FieldValues) => {
-    console.log(data);
+  const [createSchedule] = useCreateDoctorMutation();
+  const handleDatePicker = async (values: FieldValues) => {
+    console.log(values);
 
-    data.startDate = dateFormatter(data.startDate);
-    data.endDate = dateFormatter(data.endDate);
+    values.startDate = dateFormatter(values.startDate);
+    values.endDate = dateFormatter(values.endDate);
+    values.startTime = timeFormatter(values.startTime);
+    values.endTime = timeFormatter(values.endTime);
+    console.log(values);
 
-    data.startTime = timeFormatter(data.startTime);
-    data.endTime = timeFormatter(data.endTime);
-    console.log(data);
+    /* 
+    startDate: '2024-11-23',
+    endDate: '2024-11-23',
+    startTime: '15:00',
+    endTime: '16:00'
+
+    startDate: '2024-11-23',
+    endDate: '2024-11-23',
+    startTime: '15:00',
+    endTime: '16:00'
+    */
 
     try {
+      const responseFromSchedule = await createSchedule(values).unwrap();
+      console.log(responseFromSchedule); // ERROR :Unexpected token u in JSON at position 0
     } catch (err: any) {
       console.log(err.message);
     }
