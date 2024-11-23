@@ -9,6 +9,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Sidebar from "../Sidebar/Sidebar";
+import { useGetUserDataQuery } from "@/redux/api/userApi";
+import { Avatar, Stack, Tooltip } from "@mui/material";
+import AccountMenu from "../AccountMenu/AccountMenu";
 
 const drawerWidth = 240;
 
@@ -19,6 +22,16 @@ export default function DashboardDrawer({
 }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
+    null
+  );
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const { data, isLoading } = useGetUserDataQuery({});
+  console.log(data);
+  console.log(isLoading);
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -35,9 +48,20 @@ export default function DashboardDrawer({
     }
   };
 
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
-  // Remove this const when copying and pasting into your project.
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -47,8 +71,8 @@ export default function DashboardDrawer({
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-          backgroundColor : "#F4F7FE",
-          boxShadow : "1px 1px 10px lightgray",
+          backgroundColor: "#F4F7FE",
+          boxShadow: "1px 1px 10px lightgray",
         }}
       >
         <Toolbar>
@@ -57,18 +81,42 @@ export default function DashboardDrawer({
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" }, color : "primary.main" }}
+            sx={{ mr: 2, display: { sm: "none" }, color: "primary.main" }}
           >
             <MenuIcon />
           </IconButton>
-          <Box > 
-          <Typography variant="h6" noWrap component="div" color={"gray"}>
-            Hii, Tahmid Hasan.
-          </Typography>
-          <Typography variant="body2" noWrap component="div" color={"primary.main"}>
-            Wellcome To, Health Care
-          </Typography>
-          </Box>
+          <Stack
+            direction="row"
+            spacing={2}
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ flex: 1, width: "100%" }} // Ensure the Stack stretches to full width
+          >
+            {/* Left side */}
+            <Box>
+              <Typography variant="h6" noWrap component="div" color={"gray"}>
+                {isLoading ? `Loading...` : `Hi, ${data?.name}`}
+              </Typography>
+              <Typography
+                variant="body2"
+                noWrap
+                component="div"
+                color={"primary.main"}
+              >
+                Welcome To, Health Care
+              </Typography>
+            </Box>
+
+            {/* Right side */}
+            <Tooltip title="Open settings">
+              <Stack direction="row">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt={data?.name} src={`data?.profilePhoto`} />
+                </IconButton>
+                <AccountMenu />
+              </Stack>
+            </Tooltip>
+          </Stack>
         </Toolbar>
       </AppBar>
       <Box
@@ -93,7 +141,7 @@ export default function DashboardDrawer({
             },
           }}
         >
-          <Sidebar/>
+          <Sidebar />
         </Drawer>
         <Drawer
           variant="permanent"
@@ -106,7 +154,7 @@ export default function DashboardDrawer({
           }}
           open
         >
-          <Sidebar/>
+          <Sidebar />
         </Drawer>
       </Box>
       <Box
