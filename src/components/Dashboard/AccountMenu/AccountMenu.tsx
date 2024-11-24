@@ -53,6 +53,7 @@ export default function AccountMenu() {
   const handleLogout = () => {
     setAnchorEl(null);
     removeUser();
+    router.push("/login");
     // logoutUser(router);
   };
 

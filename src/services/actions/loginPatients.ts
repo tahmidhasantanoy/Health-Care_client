@@ -1,4 +1,4 @@
-"use server";
+// "use server"; // it's outside of app folder & i want it as server side
 import { FieldValues } from "react-hook-form";
 
 // export const loginPatients = async (data: FormData) => {
@@ -11,7 +11,8 @@ export const loginPatients = async (data: FieldValues) => {
         "content-type": "application/json",
       },
       body: JSON.stringify(data),
-      cache: "no-store",
+      // cache: "no-store",
+      credentials: "include", // it set refresh token to cookies
     }
   );
 
